@@ -17,13 +17,20 @@ require("tigerman55.remap")
 require("tigerman55.vim-options")
 require("tigerman55.create-shortcut")
 
---[[
-local project_root = vim.fn.getcwd();
+local path = vim.fn.stdpath("config") .. "/lua/tigerman55/projects/local/config.lua"
 
-if project_root == '/home/jkoch/php-projects/someproject' then
-    require("tigerman55.projects.someproject")
-elseif project_root == '/home/jkoch/ts-projects/otherproj' then
-    require("tigerman55.projects.otherproj")
+local f, err = loadfile(path)
+
+if f ~= nil then
+    local project_root = vim.fn.getcwd();
+    local localProjects = f()
+
+    for projectName, projectRoot in pairs(localProjects) do
+        if project_root == projectRoot then
+            require("tigerman55.projects.local." .. projectName)
+
+            break
+        end
+    end
 end
-]]--
 
