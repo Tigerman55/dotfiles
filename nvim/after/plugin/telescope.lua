@@ -54,7 +54,7 @@ vim.api.nvim_create_autocmd("TermOpen", {
   end,
 })
 
-vim.keymap.set("n", "<C-e>", function()
+vim.keymap.set("n", "<C-h>", function()
   require("telescope.builtin").buffers({
     show_all_buffers = false,   -- only listed buffers
     sort_lastused = true,
