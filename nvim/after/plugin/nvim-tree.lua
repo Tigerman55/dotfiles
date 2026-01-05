@@ -17,7 +17,7 @@ require("nvim-tree").setup({
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
     if vim.fn.argc() == 0 then
-      vim.cmd("Explore")
+      vim.cmd("Oil")
       return
     end
 
@@ -25,7 +25,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
       local arg = vim.fn.argv(0)
       if vim.fn.isdirectory(arg) == 1 then
         vim.cmd("cd " .. vim.fn.fnameescape(arg))
-        vim.cmd("Explore")
+        vim.cmd("Oil")
       end
     end
   end,
@@ -60,29 +60,3 @@ require("nvim-tree").setup({
     -- Other nvim-tree configurations can go here
 })
 
-vim.api.nvim_create_autocmd("VimEnter", {
-  callback = function()
-    if vim.fn.argc() == 0 then
-      vim.cmd("Explore")
-      return
-    end
-
-    if vim.fn.argc() == 1 then
-      local arg = vim.fn.argv(0)
-      if vim.fn.isdirectory(arg) == 1 then
-        vim.cmd("cd " .. vim.fn.fnameescape(arg))
-        vim.cmd("Explore")
-      end
-    end
-  end,
-})
-
-vim.keymap.set("n", "<leader>e", function()
-  local api = require("nvim-tree.api")
-
-  -- Reveal the current file. If nvim-tree is closed, this opens it.
-  api.tree.find_file({
-    open = true,
-    focus = true,
-  })
-end, { desc = "NvimTree: focus current file" })
