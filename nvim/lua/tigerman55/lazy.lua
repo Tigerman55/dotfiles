@@ -183,7 +183,8 @@ require("lazy").setup({
         opts = {},
     },
     {
-        "stevearc/oil.nvim"
+        "stevearc/oil.nvim",
+        dependencies = {{ "nvim-mini/mini.icons", opts = {} }},
     }
 })
 
