@@ -1,5 +1,5 @@
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>pv", "<cmd>Oil<CR>")
 vim.keymap.set("n", "<leader>do", vim.diagnostic.open_float, { desc = "Open diagnostics float" })
 vim.keymap.set("n", "<leader><leader>", "<C-^>", { desc = "Switch to last file" })
 

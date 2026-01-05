@@ -39,11 +39,19 @@ vim.keymap.set("v", "<leader>fg", function()
   require('telescope.builtin').live_grep({ default_text = query })
 end, { desc = "Live grep with visual selection" })
 
--- directory grep
+-- directory grep (works in normal buffers + oil buffers)
 vim.keymap.set("n", "<leader>dg", function()
-    require("telescope.builtin").live_grep({ 
-        search_dirs = { vim.fn.expand("%:p:h") },
-    })
+  local dir
+
+  if vim.bo.filetype == "oil" then
+    dir = require("oil").get_current_dir()
+  else
+    dir = vim.fn.expand("%:p:h")
+  end
+
+  require("telescope.builtin").live_grep({
+    search_dirs = { dir },
+  })
 end, { desc = "live grep inside active directory" })
 
 -- Don't list terminal buffers (so Telescope buffers won't show them)
@@ -62,7 +70,6 @@ vim.keymap.set("n", "<C-h>", function()
   })
 end, { desc = "Buffers from this session (files only)" })
 
-
 vim.keymap.set("n", "<leader>nd", function()
   local builtin = require("telescope.builtin")
 
@@ -72,14 +79,13 @@ vim.keymap.set("n", "<leader>nd", function()
   builtin.find_files({
     prompt_title = "Git Tracked Directories",
     cwd = git_root,
-    -- List all tracked directories once; Telescope will fuzzy-filter them
     find_command = {
       "git",
       "-C", git_root,
       "ls-tree",
-      "-d",          -- show directories
-      "-r",          -- recurse
-      "--name-only", -- just the path
+      "-d",
+      "-r",
+      "--name-only",
       "HEAD",
     },
     attach_mappings = function(_, map)
@@ -87,10 +93,16 @@ vim.keymap.set("n", "<leader>nd", function()
         local actions = require("telescope.actions")
         local state = require("telescope.actions.state")
         local entry = state.get_selected_entry()
-
         actions.close(prompt_bufnr)
 
-        vim.cmd("Explore " .. entry.value) -- open netrw there
+        local rel = entry.value
+        local abs = vim.fs.joinpath(git_root, rel)
+
+        -- Option A: Lua API
+        require("oil").open(abs)
+
+        -- Option B (instead): command
+        -- vim.cmd("Oil " .. vim.fn.fnameescape(abs))
       end)
       return true
     end,
