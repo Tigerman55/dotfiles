@@ -12,10 +12,22 @@ vim.api.nvim_create_user_command(
     { nargs = "*" }
 )
 
+local function unquote(s)
+    s = vim.fn.trim(s)
+    local q = s:sub(1, 1)
+
+    if (q == "'" or q == '"') and s:sub(-1) == q then
+        return s:sub(2, -2)
+    end
+
+    return s
+end
+
 vim.api.nvim_create_user_command(
     "Gc",
     function(opts)
-        vim.cmd("G commit -m " .. vim.fn.shellescape(opts.args))
+        local msg = unquote(opts.args)
+        vim.cmd("G commit -m " .. vim.fn.shellescape(msg))
     end,
     { nargs = 1 }
 )
