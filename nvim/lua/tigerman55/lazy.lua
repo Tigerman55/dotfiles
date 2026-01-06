@@ -203,5 +203,16 @@ require("lazy").setup({
         dependencies = { "tpope/vim-dadbod" },
         ft = { "sql", "mysql" },
     },
+    { "mfussenegger/nvim-dap" },
+    { "rcarriga/nvim-dap-ui", dependencies = { "nvim-neotest/nvim-nio" } },
+    { "theHamsta/nvim-dap-virtual-text", opts = {} },
+    {
+        "jay-babu/mason-nvim-dap.nvim",
+        dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
+        opts = {
+            ensure_installed = { "js-debug-adapter" },
+            automatic_installation = true,
+        },
+    },
 })
 
