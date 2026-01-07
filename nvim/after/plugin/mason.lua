@@ -5,6 +5,6 @@ require("mason-lspconfig").setup({
 })
 
 require("mason-nvim-dap").setup({
-  ensure_installed = { "js-debug-adapter" },
-  automatic_installation = true,
+    ensure_installed = { "js" },
+    automatic_installation = true,
 })
