@@ -1,5 +1,6 @@
 local dap = require("dap")
 local dapui = require("dapui")
+local dapvt = require("nvim-dap-virtual-text");
 
 dapui.setup({
     layouts = {
@@ -35,6 +36,10 @@ vim.keymap.set("n", "<F3>", dap.step_over)
 vim.keymap.set("n", "<F4>", dap.step_out)
 vim.keymap.set("n", "<F5>", dap.step_back)
 vim.keymap.set("n", "<F13>", dap.restart)
+
+vim.keymap.set("n", "<leader>dv", function()
+    dapvt.toggle()
+end, { desc = "DAP virtual text toggle" })
 
 dap.listeners.before.attach.dapui_config = function()
     dapui.open()
