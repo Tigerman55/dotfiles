@@ -21,18 +21,43 @@ vim.lsp.config("intelephense", {
 })
 
 vim.lsp.config("jsonls", {
-  settings = {
-    json = {
-      format = {
-        enable = true,
-      },
-      validate = {
-        enable = true,
-      },
-      schemas = require("schemastore").json.schemas(),
+    settings = {
+        json = {
+            format = {
+                enable = true,
+            },
+            validate = {
+                enable = true,
+            },
+            schemas = require("schemastore").json.schemas({
+                select = {
+                    "package.json",
+                    "tsconfig.json",
+                    ".eslintrc",
+                },
+            }),
+        },
     },
-  },
 })
+
+-- keeping in case we use eslint in the future
+--[[vim.lsp.config("eslint", {
+    on_attach = function(client, bufnr)
+        -- leave these to typescript-tools LSP
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
+        client.server_capabilities.renameProvider = false
+        client.server_capabilities.hoverProvider = false
+        client.server_capabilities.definitionProvider = false
+        client.server_capabilities.referencesProvider = false
+        client.server_capabilities.documentSymbolProvider = false
+        client.server_capabilities.workspaceSymbolProvider = false
+        client.server_capabilities.signatureHelpProvider = false
+    end,
+    settings = {
+        workingDirectory = { mode = "auto" },
+    },
+})]]--
 
 vim.lsp.enable({"intelephense","jsonls"})
 

@@ -1,7 +1,7 @@
 require("mason").setup()
 
 require("mason-lspconfig").setup({
-    ensure_installed = { "intelephense", "jsonls" }, -- automatically install Intelephense
+    ensure_installed = { "intelephense", "jsonls" },
 })
 
 require("mason-nvim-dap").setup({
