@@ -59,7 +59,32 @@ vim.lsp.config("jsonls", {
     },
 })]]--
 
-vim.lsp.enable({"intelephense","jsonls"})
+-- init.lua
+vim.lsp.config('lua_ls', {
+  settings = {
+    Lua = {
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = vim.api.nvim_get_runtime_file("", true),
+        checkThirdParty = false,
+      },
+      -- Get the language server to recognize the `vim` global and other Neovim globals
+      diagnostics = {
+        globals = { 'vim' },
+      },
+      runtime = {
+        -- Tell the language server which version of Lua you're using
+        version = 'LuaJIT',
+      },
+      telemetry = {
+        enable = false,
+      },
+    },
+  },
+})
+
+
+vim.lsp.enable({"intelephense","jsonls","lua_ls"})
 
 -- keymaps
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename variable" })
