@@ -175,10 +175,9 @@ require("lazy").setup({
         event = "InsertEnter",
         opts = {
             -- specific options usually not required, but here is how to force the slash behavior
-            enable_close_on_slash = true, 
+            enable_close_on_slash = true,
             enable_close = true, -- Auto close tags
             enable_rename = true, -- Auto rename pairs of tags
-            enable_close_on_slash = true -- Auto close on trailing </
         },
         config = function(_, opts)
             require('nvim-ts-autotag').setup({ opts = opts })
