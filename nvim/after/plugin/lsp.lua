@@ -1,3 +1,5 @@
+local env = require'tigerman55.env'.vars
+
 -- LSP capabilities (for nvim-cmp)
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
@@ -7,7 +9,7 @@ vim.lsp.config("intelephense", {
   root_markers = { "composer.json", ".git", ".intelephense" },
   flags = { debounce_text_changes = 300 },
   init_options = {
-    licenceKey = os.getenv("INTELEPHENSE_KEY"),
+    licenceKey = env.INTELEPHENSE_KEY,
   },
   capabilities = capabilities,
 
