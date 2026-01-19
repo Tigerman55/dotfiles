@@ -40,10 +40,3 @@ vim.keymap.set("n", "<F13>", dap.restart)
 vim.keymap.set("n", "<leader>dv", function()
     dapvt.toggle()
 end, { desc = "DAP virtual text toggle" })
-
-dap.listeners.before.attach.dapui_config = function()
-    dapui.open()
-end
-dap.listeners.before.launch.dapui_config = function()
-    dapui.open()
-end
