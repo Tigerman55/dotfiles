@@ -1,6 +1,5 @@
 local nvim_start_cwd = vim.loop.cwd()
 
-local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>pf', function()
     require("telescope.builtin").find_files({
         cwd = nvim_start_cwd,
@@ -16,28 +15,6 @@ vim.keymap.set("n", "<C-p>", function()
     })
 end, { desc = "Telescope find files" })
 
-
---[[vim.keymap.set("n", "<C-p>", function()
-  builtin.find_files({
-    find_command = { "fd", "--type", "f", "--hidden", "--follow" },
-  })
-end, { desc = "Telescope: find all files (Git-aware)" })]] --
-vim.keymap.set("v", "<leader>fg", function()
-    -- Get selected text
-    local _, ls, cs = unpack(vim.fn.getpos("'<"))
-    local _, le, ce = unpack(vim.fn.getpos("'>"))
-
-    local lines = vim.fn.getline(ls, le)
-    if #lines == 0 then return end
-
-    lines[#lines] = string.sub(lines[#lines], 1, ce) -- trim end
-    lines[1] = string.sub(lines[1], cs)            -- trim start
-
-    local query = table.concat(lines, " ")
-
-    -- Open Telescope live_grep with default text
-    require('telescope.builtin').live_grep({ default_text = query })
-end, { desc = "Live grep with visual selection" })
 
 -- directory grep (works in normal buffers + oil buffers)
 vim.keymap.set("n", "<leader>dg", function()

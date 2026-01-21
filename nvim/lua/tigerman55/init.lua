@@ -2,10 +2,11 @@ require("tigerman55.lazy")
 require("tigerman55.remap")
 require("tigerman55.vim-options")
 require("tigerman55.create-shortcut")
+require("tigerman55.config.telescope.multigrep").setup()
 
 local path = vim.fn.stdpath("config") .. "/lua/tigerman55/projects/local/config.lua"
 
-local f, err = loadfile(path)
+local f, _ = loadfile(path)
 
 if f ~= nil then
     local project_root = vim.fn.getcwd();

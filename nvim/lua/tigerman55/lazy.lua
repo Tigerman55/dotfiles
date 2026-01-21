@@ -63,6 +63,15 @@ require("lazy").setup({
             { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
         },
         cmd = "Telescope",
+        config = function()
+            require 'telescope'.setup {
+                extensions = {
+                    fzf = {}
+                }
+            }
+
+            require 'telescope'.load_extension('fzf')
+        end
     },
 
     -- git in nvim
