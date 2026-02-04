@@ -22,11 +22,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
 require("lazy").setup({
-
-    -- Lazy itself (optional in Lazy.nvim, but included for clarity)
     { "folke/lazy.nvim" },
-
-    -- file-level structure tool (Treesitter)
     {
         "nvim-treesitter/nvim-treesitter",
         build = function()
@@ -54,8 +50,6 @@ require("lazy").setup({
             }
         end
     },
-
-    -- file telescoping (Telescope)
     {
         "nvim-telescope/telescope.nvim",
         dependencies = {
@@ -73,14 +67,10 @@ require("lazy").setup({
             require 'telescope'.load_extension('fzf')
         end
     },
-
-    -- git in nvim
     {
         "tpope/vim-fugitive",
         cmd = { "Git", "Gdiffsplit", "Gread", "Gwrite", "Gcommit", "Gstatus" },
     },
-
-    -- LSP configuration
     {
         "neovim/nvim-lspconfig",
         dependencies = {
@@ -96,8 +86,6 @@ require("lazy").setup({
         },
         event = { "BufReadPre", "BufNewFile" },
     },
-
-    -- Mason: LSP/DAP/Formatter/Linter installer
     {
         "williamboman/mason.nvim",
         build = ":MasonUpdate",
@@ -107,8 +95,6 @@ require("lazy").setup({
         "williamboman/mason-lspconfig.nvim",
         dependencies = { "williamboman/mason.nvim" },
     },
-
-    -- Autocomplete base
     {
         "hrsh7th/nvim-cmp",
         event = "InsertEnter",
@@ -116,8 +102,6 @@ require("lazy").setup({
     { "hrsh7th/cmp-nvim-lsp", dependencies = "nvim-cmp" },
     { "hrsh7th/cmp-buffer",   dependencies = "nvim-cmp" },
     { "hrsh7th/cmp-path",     dependencies = "nvim-cmp" },
-
-    -- Snippet engine
     {
         "L3MON4D3/LuaSnip",
         dependencies = {
@@ -125,7 +109,6 @@ require("lazy").setup({
         },
         event = "InsertEnter",
     },
-    -- Phpactor (for import class, refactoring, etc.)
     {
         "phpactor/phpactor",
         build = "composer install --no-dev -o",
@@ -149,32 +132,7 @@ require("lazy").setup({
         end,
     },
     { 'b0o/SchemaStore.nvim' },
-    -- in your plugins list
-    {
-        "lukas-reineke/indent-blankline.nvim",
-        main = "ibl",
-        opts = {
-            indent = {
-                char = "│",
-            },
-            scope = {
-                enabled = true,
-                show_start = false,
-                show_end = false,
-                include = {
-                    node_type = {
-                        php = {
-                            "array_creation_expression",
-                            "object_creation_expression",
-                            "class_declaration",
-                            "method_declaration",
-                            "function_definition",
-                        },
-                    },
-                },
-            },
-        },
-    },
+    { "lukas-reineke/indent-blankline.nvim" },
     { 'RRethy/vim-illuminate' },
     { 'kevinhwang91/nvim-ufo', dependencies = 'kevinhwang91/promise-async' },
     {
