@@ -89,3 +89,5 @@ end)
 vim.keymap.set("n", "<leader>fw", function()
     require("telescope.builtin").grep_string()
 end, { desc = "Search word under cursor" })
+
+vim.keymap.set("n", "<leader>tr", "<cmd>Telescope resume<CR>", { desc = "Telescope resume" })
