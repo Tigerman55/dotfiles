@@ -32,23 +32,6 @@ vim.keymap.set("n", "<leader>rp", function()
     print("Copied: " .. rel)
 end, { desc = "Copy file path relative to project root" })
 
-vim.keymap.set("v", "<leader>fg", function()
-    -- Get selected text
-    local _, ls, cs = unpack(vim.fn.getpos("'<"))
-    local _, le, ce = unpack(vim.fn.getpos("'>"))
-
-    local lines = vim.fn.getline(ls, le)
-    if #lines == 0 then return end
-
-    lines[#lines] = string.sub(lines[#lines], 1, ce) -- trim end
-    lines[1] = string.sub(lines[1], cs)              -- trim start
-
-    local query = table.concat(lines, " ")
-
-    -- Open Telescope live_grep with default text
-    require('telescope.builtin').live_grep({ default_text = query })
-end, { desc = "Live grep with visual selection" })
-
 -- Utility: find PSR-4 namespace candidate from project root
 local function derive_namespace(filepath)
     local root = vim.fs.root(filepath, { "composer.json", ".git" })

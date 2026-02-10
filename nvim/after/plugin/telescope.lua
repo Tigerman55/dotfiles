@@ -86,10 +86,6 @@ vim.keymap.set("n", "<leader>nd", function()
     })
 end)
 
-vim.keymap.set("n", "<leader>fg", function()
-    require("telescope.builtin").live_grep()
-end, { desc = "Search text in project (live grep)" })
-
 vim.keymap.set("n", "<leader>fw", function()
     require("telescope.builtin").grep_string()
 end, { desc = "Search word under cursor" })
