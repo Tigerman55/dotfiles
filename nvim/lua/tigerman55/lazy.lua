@@ -202,5 +202,8 @@ require("lazy").setup({
     {
         "folke/todo-comments.nvim",
         dependencies = { "nvim-lua/plenary.nvim" },
+    },
+    {
+        'vim-test/vim-test',
     }
 })
