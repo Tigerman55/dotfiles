@@ -59,6 +59,14 @@ require("lazy").setup({
         cmd = "Telescope",
         config = function()
             require 'telescope'.setup {
+                defaults = {
+                    mappings = {
+                        i = {
+                            ["<C-j>"] = require 'telescope.actions'.move_selection_next,
+                            ["<C-k>"] = require 'telescope.actions'.move_selection_previous,
+                        },
+                    },
+                },
                 extensions = {
                     fzf = {}
                 }
@@ -134,7 +142,7 @@ require("lazy").setup({
     { 'b0o/SchemaStore.nvim' },
     { "lukas-reineke/indent-blankline.nvim" },
     { 'RRethy/vim-illuminate' },
-    { 'kevinhwang91/nvim-ufo', dependencies = 'kevinhwang91/promise-async' },
+    { 'kevinhwang91/nvim-ufo',              dependencies = 'kevinhwang91/promise-async' },
     {
         "pmizio/typescript-tools.nvim",
         dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
