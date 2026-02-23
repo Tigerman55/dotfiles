@@ -25,30 +25,8 @@ require("lazy").setup({
     { "folke/lazy.nvim" },
     {
         "nvim-treesitter/nvim-treesitter",
-        build = function()
-            pcall(require("nvim-treesitter.install").update({ with_sync = true }))
-        end,
-        event = { "BufReadPost", "BufNewFile" },
-        config = function()
-            require 'nvim-treesitter'.setup {
-                ensure_installed = { "dockerfile", "make", "html", "css", "php", "phpdoc", "json", "javascript", "typescript", "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
-
-                -- Install parsers synchronously (only applied to `ensure_installed`)
-                sync_install = false,
-
-                -- Automatically install missing parsers when entering buffer
-                -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-                auto_install = true,
-
-                highlight = {
-                    enable = true,
-                    additional_vim_regex_highlighting = false,
-                },
-                indent = {
-                    enable = true,
-                }
-            }
-        end
+        lazy = false,
+        build = ":TSUpdate"
     },
     {
         "nvim-telescope/telescope.nvim",

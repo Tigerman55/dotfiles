@@ -85,8 +85,21 @@ vim.lsp.config('lua_ls', {
   },
 })
 
+-- Twig LSP Configuration
+vim.lsp.config("twiggy_language_server", {
+    cmd = { "twiggy-language-server", "--stdio" },
+    filetypes = { "twig" },
+    -- Sharing the capabilities you already defined for cmp-nvim-lsp
+    capabilities = capabilities,
+    settings = {
+        twiggy = {
+            -- Add any specific twiggy settings here if needed
+        }
+    }
+})
 
-vim.lsp.enable({"intelephense","jsonls","lua_ls"})
+-- Update your enable list to include twiggy_language_server
+vim.lsp.enable({ "intelephense", "jsonls", "lua_ls", "twiggy_language_server" })
 
 -- keymaps
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename variable" })
