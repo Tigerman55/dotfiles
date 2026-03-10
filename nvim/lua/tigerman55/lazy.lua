@@ -191,5 +191,15 @@ require("lazy").setup({
     },
     {
         'vim-test/vim-test',
+    },
+    {
+        'nanotee/sqls.nvim'
+    },
+    {
+        'jmbuhr/otter.nvim',
+        dependencies = {
+            'nvim-treesitter/nvim-treesitter',
+        },
+        opts = {},
     }
 })

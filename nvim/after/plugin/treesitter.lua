@@ -12,6 +12,7 @@ ts.setup {
 }
 
 ts.install {
+    "sql",
     "dockerfile",
     "make",
     "html",
@@ -31,3 +32,11 @@ ts.install {
     "twig"
 }
 
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "typescript", "typescriptreact" },
+    callback = function()
+        vim.treesitter.start()
+        require("otter").activate({ "sql" })
+    end,
+})

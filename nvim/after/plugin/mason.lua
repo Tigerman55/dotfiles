@@ -1,7 +1,7 @@
 require("mason").setup()
 
 require("mason-lspconfig").setup({
-    ensure_installed = { "intelephense", "jsonls", "lua_ls" },
+    ensure_installed = { "intelephense", "jsonls", "lua_ls", "sqls" },
 })
 
 require("mason-nvim-dap").setup({
