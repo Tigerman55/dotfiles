@@ -207,5 +207,26 @@ require("lazy").setup({
             },
             handle_leading_whitespace = true,
         },
+    },
+    {
+        "mfussenegger/nvim-lint",
+        config = function()
+            local lint = require("lint")
+
+            lint.linters_by_ft.sql = { "sqlfluff" }
+            lint.linters_by_ft.mysql = { "sqlfluff" }
+
+            local augroup = vim.api.nvim_create_augroup("sqlfluff_lint", { clear = true })
+
+            vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+                group = augroup,
+                callback = function(args)
+                    local ft = vim.bo[args.buf].filetype
+                    if ft == "sql" or ft == "mysql" then
+                        lint.try_lint("sqlfluff")
+                    end
+                end,
+            })
+        end,
     }
 })

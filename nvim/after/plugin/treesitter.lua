@@ -32,7 +32,6 @@ ts.install {
     "twig"
 }
 
-
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "typescript", "typescriptreact" },
     callback = function()
