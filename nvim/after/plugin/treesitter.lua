@@ -29,7 +29,8 @@ ts.install {
     "query",
     "markdown",
     "markdown_inline",
-    "twig"
+    "twig",
+    "svelte"
 }
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -37,5 +38,12 @@ vim.api.nvim_create_autocmd("FileType", {
     callback = function()
         vim.treesitter.start()
         require("otter").activate({ "sql" })
+    end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "svelte" },
+    callback = function()
+        vim.treesitter.start()
     end,
 })

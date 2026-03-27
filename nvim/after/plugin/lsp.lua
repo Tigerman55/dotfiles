@@ -98,8 +98,22 @@ vim.lsp.config("twiggy_language_server", {
     }
 })
 
+vim.lsp.config("svelte", {
+  capabilities = capabilities,
+  filetypes = { "svelte" },
+})
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = { "*.js", "*.ts" },
+  callback = function(ctx)
+    for _, client in ipairs(vim.lsp.get_clients({ name = "svelte" })) do
+      client.notify("$/onDidChangeTsOrJsFile", { uri = vim.uri_from_fname(ctx.match) })
+    end
+  end,
+})
+
 -- Update your enable list to include twiggy_language_server
-vim.lsp.enable({ "intelephense", "jsonls", "lua_ls", "twiggy_language_server" })
+vim.lsp.enable({ "intelephense", "jsonls", "lua_ls", "twiggy_language_server", "svelte" })
 
 -- keymaps
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename variable" })
