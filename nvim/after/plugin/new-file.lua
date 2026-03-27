@@ -18,7 +18,6 @@ $0
         typescript = [[
 export class $1 {
     public constructor($2) {
-        $3
     }
 
     $0
