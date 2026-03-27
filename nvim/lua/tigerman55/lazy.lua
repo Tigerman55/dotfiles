@@ -232,6 +232,17 @@ require("lazy").setup({
     {
         "sudo-tee/opencode.nvim",
         config = function()
+            vim.keymap.set("x", "<leader>oa", function()
+                require("opencode.api").add_visual_selection({ open_input = true })
+                vim.schedule(function()
+                    vim.cmd("startinsert")
+                end)
+            end, { desc = "Ask opencode about selection" })
+
+            vim.keymap.set("n", "<leader>om", function()
+                require("opencode.api").switch_mode()
+            end, { desc = "Cycle opencode mode/agent" })
+
             require("opencode").setup({})
         end,
         dependencies = {
