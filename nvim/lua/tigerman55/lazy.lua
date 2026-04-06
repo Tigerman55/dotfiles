@@ -259,4 +259,5 @@ require("lazy").setup({
             'nvim-telescope/telescope.nvim',
         },
     },
+    {'brenoprata10/nvim-highlight-colors'}
 })

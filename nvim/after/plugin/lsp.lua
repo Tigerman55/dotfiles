@@ -103,6 +103,53 @@ vim.lsp.config("svelte", {
   filetypes = { "svelte" },
 })
 
+vim.lsp.config("cssls", {
+  capabilities = capabilities,
+  settings = {
+    css = {
+      lint = {
+        unknownAtRules = "ignore",
+      },
+    },
+    scss = {
+      lint = {
+        unknownAtRules = "ignore",
+      },
+    },
+    less = {
+      lint = {
+        unknownAtRules = "ignore",
+      },
+    },
+  },
+})
+
+vim.lsp.config("tailwindcss", {
+  capabilities = capabilities,
+  filetypes = {
+    "html",
+    "css",
+    "scss",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "svelte",
+  },
+  settings = {
+    tailwindCSS = {
+      validate = true,
+      lint = {
+        cssConflict = "warning",
+        invalidApply = "error",
+        invalidConfigPath = "error",
+        invalidTailwindDirective = "error",
+        recommendedVariantOrder = "warning",
+      },
+    },
+  },
+})
+
 vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = { "*.js", "*.ts" },
   callback = function(ctx)
@@ -113,7 +160,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 })
 
 -- Update your enable list to include twiggy_language_server
-vim.lsp.enable({ "intelephense", "jsonls", "lua_ls", "twiggy_language_server", "svelte" })
+vim.lsp.enable({ "intelephense", "jsonls", "lua_ls", "twiggy_language_server", "svelte", "cssls", "tailwindcss" })
 
 -- keymaps
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename variable" })
