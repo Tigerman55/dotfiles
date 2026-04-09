@@ -231,6 +231,7 @@ require("lazy").setup({
     },
     {
         "sudo-tee/opencode.nvim",
+        commit = '281e026d7c4f267580cfd06adf09ffd5dbd54a66',
         config = function()
             vim.keymap.set("x", "<leader>oa", function()
                 require("opencode.api").add_visual_selection({ open_input = true })
