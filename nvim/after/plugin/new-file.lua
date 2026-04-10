@@ -6,12 +6,9 @@ local templates = {
 
 $0
 ]],
-        svelte = [[<script lang='ts'>
+        svelte = [[<script lang="ts">
     $0
 </script>
-
-<main>
-</main>
 ]],
     },
     class = {
