@@ -4,6 +4,10 @@ vim.o.foldenable = true
 
 require('ufo').setup({
     provider_selector = function(bufnr, filetype, buftype)
+        if filetype == 'svelte' then
+            return { 'treesitter', 'indent' }
+        end
+
         if filetype == 'php' then
             return { 'lsp', 'indent' }
         end
@@ -24,6 +28,7 @@ require('ufo').setup({
         typescriptreact = { 'imports' },
         javascript = { 'imports' },
         javascriptreact = { 'imports' },
+        svelte = { 'imports', 'import_statement' },
     }
 })
 
