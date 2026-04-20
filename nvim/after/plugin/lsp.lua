@@ -3,6 +3,13 @@ local env = require'tigerman55.env'.vars
 -- LSP capabilities (for nvim-cmp)
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
+-- document colors are breaking things right now, temp fix
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(ev)
+    vim.lsp.document_color.enable(false, { bufnr = ev.buf })
+  end,
+})
+
 vim.lsp.config("intelephense", {
   cmd = { "intelephense", "--stdio" },
   filetypes = { "php" },
