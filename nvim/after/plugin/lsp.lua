@@ -1,32 +1,32 @@
-local env = require'tigerman55.env'.vars
+local env = require 'tigerman55.env'.vars
 
 -- LSP capabilities (for nvim-cmp)
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 -- document colors are breaking things right now, temp fix
 vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function(ev)
-    vim.lsp.document_color.enable(false, { bufnr = ev.buf })
-  end,
+    callback = function(ev)
+        vim.lsp.document_color.enable(false, { bufnr = ev.buf })
+    end,
 })
 
 vim.lsp.config("intelephense", {
-  cmd = { "intelephense", "--stdio" },
-  filetypes = { "php" },
-  root_markers = { "composer.json", ".git", ".intelephense" },
-  flags = { debounce_text_changes = 300 },
-  init_options = {
-    licenceKey = env.INTELEPHENSE_KEY,
-  },
-  capabilities = capabilities,
-
-  settings = {
-    intelephense = {
-      diagnostics = {
-        typeErrors = false,
-      },
+    cmd = { "intelephense", "--stdio" },
+    filetypes = { "php" },
+    root_markers = { "composer.json", ".git", ".intelephense" },
+    flags = { debounce_text_changes = 300 },
+    init_options = {
+        licenceKey = env.INTELEPHENSE_KEY,
     },
-  },
+    capabilities = capabilities,
+
+    settings = {
+        intelephense = {
+            diagnostics = {
+                typeErrors = false,
+            },
+        },
+    },
 })
 
 vim.lsp.config("jsonls", {
@@ -66,30 +66,30 @@ vim.lsp.config("jsonls", {
     settings = {
         workingDirectory = { mode = "auto" },
     },
-})]]--
+})]] --
 
 -- init.lua
 vim.lsp.config('lua_ls', {
-  settings = {
-    Lua = {
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = vim.api.nvim_get_runtime_file("", true),
-        checkThirdParty = false,
-      },
-      -- Get the language server to recognize the `vim` global and other Neovim globals
-      diagnostics = {
-        globals = { 'vim' },
-      },
-      runtime = {
-        -- Tell the language server which version of Lua you're using
-        version = 'LuaJIT',
-      },
-      telemetry = {
-        enable = false,
-      },
+    settings = {
+        Lua = {
+            workspace = {
+                -- Make the server aware of Neovim runtime files
+                library = vim.api.nvim_get_runtime_file("", true),
+                checkThirdParty = false,
+            },
+            -- Get the language server to recognize the `vim` global and other Neovim globals
+            diagnostics = {
+                globals = { 'vim' },
+            },
+            runtime = {
+                -- Tell the language server which version of Lua you're using
+                version = 'LuaJIT',
+            },
+            telemetry = {
+                enable = false,
+            },
+        },
     },
-  },
 })
 
 -- Twig LSP Configuration
@@ -106,64 +106,64 @@ vim.lsp.config("twiggy_language_server", {
 })
 
 vim.lsp.config("svelte", {
-  capabilities = capabilities,
-  filetypes = { "svelte" },
+    capabilities = capabilities,
+    filetypes = { "svelte" },
 })
 
 vim.lsp.config("cssls", {
-  capabilities = capabilities,
-  settings = {
-    css = {
-      lint = {
-        unknownAtRules = "ignore",
-      },
+    capabilities = capabilities,
+    settings = {
+        css = {
+            lint = {
+                unknownAtRules = "ignore",
+            },
+        },
+        scss = {
+            lint = {
+                unknownAtRules = "ignore",
+            },
+        },
+        less = {
+            lint = {
+                unknownAtRules = "ignore",
+            },
+        },
     },
-    scss = {
-      lint = {
-        unknownAtRules = "ignore",
-      },
-    },
-    less = {
-      lint = {
-        unknownAtRules = "ignore",
-      },
-    },
-  },
 })
 
 vim.lsp.config("tailwindcss", {
-  capabilities = capabilities,
-  filetypes = {
-    "html",
-    "css",
-    "scss",
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "svelte",
-  },
-  settings = {
-    tailwindCSS = {
-      validate = true,
-      lint = {
-        cssConflict = "warning",
-        invalidApply = "error",
-        invalidConfigPath = "error",
-        invalidTailwindDirective = "error",
-        recommendedVariantOrder = "warning",
-      },
+    capabilities = capabilities,
+    filetypes = {
+        "html",
+        "css",
+        "scss",
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+        "svelte",
     },
-  },
+    settings = {
+        tailwindCSS = {
+            validate = true,
+            lint = {
+                cssConflict = "warning",
+                invalidApply = "error",
+                invalidConfigPath = "error",
+                invalidTailwindDirective = "error",
+                recommendedVariantOrder = "warning",
+            },
+        },
+    },
 })
 
 vim.api.nvim_create_autocmd("BufWritePost", {
-  pattern = { "*.js", "*.ts" },
-  callback = function(ctx)
-    for _, client in ipairs(vim.lsp.get_clients({ name = "svelte" })) do
-      client.notify("$/onDidChangeTsOrJsFile", { uri = vim.uri_from_fname(ctx.match) })
-    end
-  end,
+    pattern = { "*.js", "*.ts" },
+    callback = function(ctx)
+        for _, client in ipairs(vim.lsp.get_clients({ name = "svelte" })) do
+            client.notify("$/onDidChangeTsOrJsFile", { uri = vim.uri_from_fname(ctx.match) })
+        end
+    end,
 })
 
 -- Update your enable list to include twiggy_language_server
@@ -174,8 +174,9 @@ vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename variable"
 vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "Go to definition" })
 
 vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {
-  noremap = true,
-  silent = true,
-  desc = "LSP: Find references",
+    noremap = true,
+    silent = true,
+    desc = "LSP: Find references",
 })
+
 vim.keymap.set('n', '<leader>fm', vim.lsp.buf.format, { desc = 'Format Document' })

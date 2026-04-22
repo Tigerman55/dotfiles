@@ -54,15 +54,3 @@ cmp.setup({
         end,
     },
 })
-
-local cmp = require("cmp")
-local types = require("cmp.types")
-
-cmp.setup({
-    -- your existing config…
-
-    mapping = {
-        ["<CR>"] = cmp.mapping.confirm({ select = true }),
-        -- etc...
-    },
-})
