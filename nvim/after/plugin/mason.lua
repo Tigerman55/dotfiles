@@ -1,7 +1,7 @@
 require("mason").setup()
 
 require("mason-lspconfig").setup({
-    ensure_installed = { "intelephense", "jsonls", "lua_ls", "sqls", "svelte", "cssls", "tailwindcss" },
+    ensure_installed = { "intelephense", "jsonls", "lua_ls", "sqls", "svelte", "cssls", "tailwindcss", "ts_ls" },
 })
 
 require("mason-nvim-dap").setup({

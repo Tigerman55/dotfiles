@@ -77,7 +77,7 @@ require("lazy").setup({
                 },
             },
         },
-        event = { "BufReadPre", "BufNewFile" },
+        lazy = false,
     },
     {
         "williamboman/mason.nvim",
@@ -127,12 +127,7 @@ require("lazy").setup({
     { 'b0o/SchemaStore.nvim' },
     { "lukas-reineke/indent-blankline.nvim" },
     { 'RRethy/vim-illuminate' },
-    { 'kevinhwang91/nvim-ufo',              dependencies = 'kevinhwang91/promise-async' },
-    {
-        "pmizio/typescript-tools.nvim",
-        dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-        opts = {},
-    },
+    { 'kevinhwang91/nvim-ufo', dependencies = 'kevinhwang91/promise-async' },
     {
         "windwp/nvim-ts-autotag",
         event = "InsertEnter",
@@ -266,5 +261,5 @@ require("lazy").setup({
             'nvim-telescope/telescope.nvim',
         },
     },
-    {'brenoprata10/nvim-highlight-colors'}
+    { 'brenoprata10/nvim-highlight-colors' }
 })

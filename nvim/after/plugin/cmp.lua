@@ -14,7 +14,18 @@ cmp.setup({
     },
 
     sources = {
-        { name = "nvim_lsp" },
+        {
+            name = "nvim_lsp",
+            entry_filter = function(entry, ctx)
+                if vim.bo[ctx.bufnr].filetype ~= "svelte" then
+                    return true
+                end
+
+                local source = entry.source and entry.source.source
+                local client = source and source.client
+                return not (client and client.name == "ts_ls")
+            end,
+        },
         { name = "path" },
         { name = "vim-dadbod-completion" }
     },

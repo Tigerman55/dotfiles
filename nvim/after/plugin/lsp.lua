@@ -7,6 +7,12 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(ev)
         vim.lsp.document_color.enable(false, { bufnr = ev.buf })
+
+        if vim.bo[ev.buf].filetype == "svelte" then
+            vim.schedule(function()
+                vim.lsp.semantic_tokens.enable(false, { bufnr = ev.buf })
+            end)
+        end
     end,
 })
 
@@ -52,7 +58,7 @@ vim.lsp.config("jsonls", {
 -- keeping in case we use eslint in the future
 --[[vim.lsp.config("eslint", {
     on_attach = function(client, bufnr)
-        -- leave these to typescript-tools LSP
+        -- leave these to TypeScript LSP
         client.server_capabilities.documentFormattingProvider = false
         client.server_capabilities.documentRangeFormattingProvider = false
         client.server_capabilities.renameProvider = false
@@ -108,6 +114,29 @@ vim.lsp.config("twiggy_language_server", {
 vim.lsp.config("svelte", {
     capabilities = capabilities,
     filetypes = { "svelte" },
+    on_attach = function(client)
+        client.server_capabilities.renameProvider = false
+    end,
+})
+
+vim.lsp.config("ts_ls", {
+    capabilities = capabilities,
+    filetypes = {
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+        "svelte",
+    },
+    init_options = {
+        plugins = {
+            {
+                name = "typescript-svelte-plugin",
+                location = vim.fn.stdpath("data") .. "/mason/packages/svelte-language-server/node_modules/typescript-svelte-plugin",
+                languages = { "svelte" },
+            },
+        },
+    },
 })
 
 vim.lsp.config("cssls", {
@@ -167,7 +196,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 })
 
 -- Update your enable list to include twiggy_language_server
-vim.lsp.enable({ "intelephense", "jsonls", "lua_ls", "twiggy_language_server", "svelte", "cssls", "tailwindcss" })
+vim.lsp.enable({ "intelephense", "jsonls", "lua_ls", "twiggy_language_server", "svelte", "cssls", "tailwindcss", "ts_ls" })
 
 -- keymaps
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename variable" })
