@@ -156,7 +156,7 @@ require("lazy").setup({
         opts = {},
     },
     {
-        "stevearc/oil.nvim",
+        "barrettruth/canola.nvim",
         dependencies = { { "nvim-mini/mini.icons", opts = {} } },
     },
     {
