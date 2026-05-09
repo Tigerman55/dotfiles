@@ -3,10 +3,13 @@ require("nvim-tree").setup({
         sorter = "case_sensitive",
     },
     view = {
-        width = 30,
+        adaptive_size = true,
     },
     renderer = {
         group_empty = true,
+    },
+    filters = {
+        dotfiles = true,
     },
     hijack_directories = {
         enable = false, -- Set to false to prevent automatic opening on directory entry
@@ -40,23 +43,3 @@ vim.keymap.set("n", "<leader>e", function()
     focus = true,
   })
 end, { desc = "NvimTree: focus current file" })
-require("nvim-tree").setup({
-    sort = {
-        sorter = "case_sensitive",
-    },
-    view = {
-        width = 30,
-    },
-    renderer = {
-        group_empty = true,
-    },
-    filters = {
-        dotfiles = true,
-    },
-    hijack_directories = {
-        enable = false, -- Set to false to prevent automatic opening on directory entry
-        auto_open = false, -- Ensure this is also false if you want no auto-opening at all
-    },
-    -- Other nvim-tree configurations can go here
-})
-

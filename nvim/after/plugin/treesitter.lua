@@ -30,7 +30,9 @@ ts.install {
     "markdown",
     "markdown_inline",
     "twig",
-    "svelte"
+    "svelte",
+    "dart",
+    "kotlin"
 }
 
 vim.api.nvim_create_autocmd("FileType", {
