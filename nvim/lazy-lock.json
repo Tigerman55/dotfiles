@@ -29,7 +29,7 @@
   "nvim-ts-autotag": { "branch": "main", "commit": "88c1453db4ba7dd24131086fe51fdf74e587d275" },
   "nvim-ufo": { "branch": "main", "commit": "ab3eb124062422d276fae49e0dd63b3ad1062cfc" },
   "nvim-web-devicons": { "branch": "master", "commit": "2795c26c916bb3c57dde308b82be51971fa92747" },
-  "opencode.nvim": { "branch": "main", "commit": "f71b2acd02271966f6044aec85bead5816a87621" },
+  "opencode.nvim": { "branch": "main", "commit": "cef831d40812537a3d53ffd73f53865255d68f69" },
   "otter.nvim": { "branch": "main", "commit": "a455e68a99d395889ab30a25ac3846a135e93c46" },
   "phpactor": { "branch": "master", "commit": "32d4bb041374748dd623e31bfae66079fc2d88be" },
   "plenary.nvim": { "branch": "master", "commit": "74b06c6c75e4eeb3108ec01852001636d85a932b" },
