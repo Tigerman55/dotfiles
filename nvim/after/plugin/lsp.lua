@@ -199,10 +199,59 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 vim.lsp.enable({ "intelephense", "jsonls", "lua_ls", "twiggy_language_server", "svelte", "cssls", "tailwindcss", "ts_ls" })
 
 -- keymaps
-vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename variable" })
-vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "Go to definition" })
+local function dedupe_lsp_list(opts, by_line)
+    local seen = {}
 
-vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {
+    opts.items = vim.tbl_filter(function(item)
+        local key_parts = by_line
+            and { item.filename or item.bufnr or "", item.lnum or "" }
+            or {
+                item.filename or item.bufnr or "",
+                item.lnum or "",
+                item.col or "",
+                item.end_lnum or "",
+                item.end_col or "",
+            }
+        local key = table.concat(key_parts, "\31")
+
+        if seen[key] then
+            return false
+        end
+
+        seen[key] = true
+        return true
+    end, opts.items)
+
+    if vim.tbl_isempty(opts.items) then
+        vim.notify("No locations found", vim.log.levels.INFO)
+        return
+    end
+
+    vim.fn.setqflist({}, " ", opts)
+
+    if #opts.items == 1 then
+        vim.cmd.cfirst()
+    else
+        vim.cmd.copen()
+    end
+end
+
+vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename variable" })
+vim.keymap.set("n", "<leader>gd", function()
+    vim.lsp.buf.definition({
+        on_list = function(opts)
+            dedupe_lsp_list(opts, true)
+        end,
+    })
+end, { desc = "Go to definition" })
+
+vim.keymap.set("n", "<leader>gr", function()
+    vim.lsp.buf.references(nil, {
+        on_list = function(opts)
+            dedupe_lsp_list(opts, false)
+        end,
+    })
+end, {
     noremap = true,
     silent = true,
     desc = "LSP: Find references",
