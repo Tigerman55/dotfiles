@@ -25,6 +25,7 @@ require("lazy").setup({
     { "folke/lazy.nvim" },
     {
         "nvim-treesitter/nvim-treesitter",
+        branch = "main",
         lazy = false,
         build = ":TSUpdate"
     },
