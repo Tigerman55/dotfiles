@@ -234,6 +234,21 @@ require("lazy").setup({
     },
     {
         "sudo-tee/opencode.nvim",
+        config = function(_, opts)
+            if vim.treesitter and vim.treesitter.language and vim.treesitter.language.register then
+                vim.treesitter.language.register("markdown", "opencode_output")
+            end
+
+            vim.api.nvim_create_autocmd("FileType", {
+                group = vim.api.nvim_create_augroup("opencode_output_treesitter", { clear = true }),
+                pattern = "opencode_output",
+                callback = function(args)
+                    pcall(vim.treesitter.start, args.buf, "markdown")
+                end,
+            })
+
+            require("opencode").setup(opts)
+        end,
         opts = {
             ui = {
                 output = {
